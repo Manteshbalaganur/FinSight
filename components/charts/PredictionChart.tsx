@@ -1,16 +1,22 @@
 "use client";
 
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Legend } from "recharts";
-import { getPredictionSeries } from "@/lib/mockData";
+import type { PredictionPoint } from "@/lib/types";
 
-export default function PredictionChart() {
-  const data = getPredictionSeries();
+export default function PredictionChart({ data, currencySymbol = "\u20B9" }: { data: PredictionPoint[]; currencySymbol?: string }) {
   return (
     <ResponsiveContainer width="100%" height={300}>
       <LineChart data={data} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
         <CartesianGrid strokeDasharray="3 3" stroke="#1F2230" vertical={false} />
-        <XAxis dataKey="date" stroke="#8B92A8" fontSize={11} tickLine={false} axisLine={false} />
-        <YAxis stroke="#8B92A8" fontSize={11} tickLine={false} axisLine={false} tickFormatter={(v) => `\u20B9${v.toFixed(0)}`} />
+        <XAxis dataKey="date" stroke="#8B92A8" fontSize={11} tickLine={false} axisLine={false} tickFormatter={(v: string) => v.slice(5)} />
+        <YAxis
+          stroke="#8B92A8"
+          fontSize={11}
+          tickLine={false}
+          axisLine={false}
+          domain={["auto", "auto"]}
+          tickFormatter={(v) => `${currencySymbol}${v.toFixed(0)}`}
+        />
         <Tooltip
           contentStyle={{
             backgroundColor: "#12141C",
@@ -18,7 +24,7 @@ export default function PredictionChart() {
             borderRadius: "0.75rem",
             color: "#F5F7FA",
           }}
-          formatter={(v: number) => [`\u20B9${v.toFixed(2)}`, ""]}
+          formatter={(v: number) => [`${currencySymbol}${v.toFixed(2)}`, ""]}
         />
         <Legend wrapperStyle={{ fontSize: "12px", color: "#8B92A8" }} iconType="circle" />
         <Line type="monotone" dataKey="actual" stroke="#3B82F6" strokeWidth={2} dot={false} name="Actual Price" />

@@ -2,9 +2,22 @@
 
 import { useState, useRef, useEffect } from "react";
 import { Send } from "lucide-react";
-import { presetQA, FALLBACK_RESPONSE } from "@/lib/mockData";
+import { api, errorMessage } from "@/lib/api";
+import { holdings } from "@/lib/holdings";
 import type { ChatMessage } from "@/lib/types";
 import { cn } from "@/lib/utils";
+
+const SUGGESTED_QUESTIONS = [
+  "How is my portfolio performing?",
+  "What is the latest news about Reliance?",
+  "Is the sentiment around TCS positive or negative?",
+  "Compare TCS and Infosys",
+  "What are the major risks of investing in HDFC Bank?",
+  "What do RSI and moving averages indicate?",
+  "How does negative news affect stock prices?",
+];
+
+const portfolio = holdings.map((h) => ({ symbol: h.ticker, qty: h.qty, buy_price: h.buyPrice }));
 
 export default function AssistantPage() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -18,31 +31,21 @@ export default function AssistantPage() {
     }
   }, [messages, typing]);
 
-  function getResponse(text: string): string {
-    const lowered = text.toLowerCase();
-    for (const qa of presetQA) {
-      if (
-        text.toLowerCase().trim() === qa.question.toLowerCase() ||
-        qa.keywords.some((kw) => lowered.includes(kw))
-      ) {
-        return qa.answer;
-      }
-    }
-    return FALLBACK_RESPONSE;
-  }
-
-  function sendMessage(text: string) {
-    if (!text.trim()) return;
+  async function sendMessage(text: string) {
+    if (!text.trim() || typing) return;
     const userMsg: ChatMessage = { role: "user", content: text };
+    const history = messages;
     setMessages((prev) => [...prev, userMsg]);
     setInput("");
     setTyping(true);
-
-    setTimeout(() => {
-      const response = getResponse(text);
-      setMessages((prev) => [...prev, { role: "assistant", content: response }]);
+    try {
+      const res = await api.chat(text, history, portfolio);
+      setMessages((prev) => [...prev, { role: "assistant", content: res.reply }]);
+    } catch (e) {
+      setMessages((prev) => [...prev, { role: "assistant", content: errorMessage(e), error: true }]);
+    } finally {
       setTyping(false);
-    }, 800);
+    }
   }
 
   return (
@@ -71,10 +74,11 @@ export default function AssistantPage() {
               >
                 <div
                   className={cn(
-                    "max-w-[75%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed",
+                    "max-w-[75%] whitespace-pre-wrap rounded-2xl px-4 py-2.5 text-sm leading-relaxed",
                     msg.role === "user"
                       ? "bg-primary text-white rounded-br-sm"
-                      : "bg-bg-hover text-text-primary rounded-bl-sm border border-border"
+                      : "bg-bg-hover text-text-primary rounded-bl-sm border border-border",
+                    msg.error && "border-loss/40 text-loss"
                   )}
                 >
                   {msg.content}
@@ -93,6 +97,7 @@ export default function AssistantPage() {
               </div>
             )}
           </div>
+
           <div className="border-t border-border p-4">
             <form
               onSubmit={(e) => {
@@ -123,14 +128,14 @@ export default function AssistantPage() {
           <div className="rounded-xl border border-border bg-bg-card p-5">
             <h3 className="mb-4 text-sm font-semibold text-text-primary">Suggested Questions</h3>
             <div className="space-y-2">
-              {presetQA.map((qa, i) => (
+              {SUGGESTED_QUESTIONS.map((q, i) => (
                 <button
                   key={i}
-                  onClick={() => sendMessage(qa.question)}
+                  onClick={() => sendMessage(q)}
                   disabled={typing}
                   className="w-full rounded-lg border border-border bg-bg-base p-3 text-left text-xs text-text-muted transition-colors duration-200 hover:border-primary/40 hover:text-text-primary disabled:opacity-50"
                 >
-                  {qa.question}
+                  {q}
                 </button>
               ))}
             </div>

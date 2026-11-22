@@ -1,0 +1,64 @@
+INFO:     127.0.0.1:15572 - "GET /api/stocks/supported HTTP/1.1" 200 OK
+INFO:     127.0.0.1:15585 - "OPTIONS /api/stocks/quotes?symbols=RELIANCE.NS%2CHDFCBANK.NS%2CTMPV.NS%2CTCS.NS%2CINFY.NS HTTP/1.1" 200 OK
+INFO:     127.0.0.1:15589 - "OPTIONS /api/stocks/RELIANCE.NS/history?period=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:15590 - "OPTIONS /api/stocks/HDFCBANK.NS/history?period=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:15591 - "OPTIONS /api/stocks/TMPV.NS/history?period=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:15593 - "OPTIONS /api/stocks/TCS.NS/history?period=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:15589 - "OPTIONS /api/news?symbol=RELIANCE.NS&limit=8 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:15595 - "OPTIONS /api/stocks/INFY.NS/history?period=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:15589 - "OPTIONS /api/news?symbol=HDFCBANK.NS&limit=8 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:15589 - "GET /api/news?symbol=RELIANCE.NS&limit=8 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:15589 - "OPTIONS /api/news?symbol=TMPV.NS&limit=8 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:15589 - "OPTIONS /api/news?symbol=TCS.NS&limit=8 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:15589 - "OPTIONS /api/news?symbol=INFY.NS&limit=8 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:15585 - "GET /api/stocks/quotes?symbols=RELIANCE.NS%2CHDFCBANK.NS%2CTMPV.NS%2CTCS.NS%2CINFY.NS HTTP/1.1" 200 OK
+INFO:     127.0.0.1:15591 - "GET /api/stocks/HDFCBANK.NS/history?period=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:15590 - "GET /api/stocks/RELIANCE.NS/history?period=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:15589 - "GET /api/stocks/INFY.NS/history?period=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:15595 - "GET /api/stocks/TCS.NS/history?period=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:15593 - "GET /api/stocks/TMPV.NS/history?period=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:15585 - "GET /api/news?symbol=HDFCBANK.NS&limit=8 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:15591 - "GET /api/news?symbol=TMPV.NS&limit=8 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:15590 - "GET /api/news?symbol=TCS.NS&limit=8 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:15589 - "GET /api/news?symbol=INFY.NS&limit=8 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:15589 - "OPTIONS /api/sentiment/analyze HTTP/1.1" 200 OK
+INFO:     127.0.0.1:15590 - "OPTIONS /api/sentiment/analyze HTTP/1.1" 200 OK
+INFO:     127.0.0.1:15591 - "OPTIONS /api/sentiment/analyze HTTP/1.1" 200 OK
+INFO:     127.0.0.1:15585 - "POST /api/sentiment/analyze HTTP/1.1" 503 Service Unavailable
+INFO:     127.0.0.1:15589 - "POST /api/sentiment/analyze HTTP/1.1" 503 Service Unavailable
+INFO:     127.0.0.1:15590 - "POST /api/sentiment/analyze HTTP/1.1" 503 Service Unavailable
+INFO:     127.0.0.1:15591 - "POST /api/sentiment/analyze HTTP/1.1" 503 Service Unavailable
+INFO:     127.0.0.1:15593 - "POST /api/sentiment/analyze HTTP/1.1" 503 Service Unavailable
+INFO:     127.0.0.1:15647 - "GET /api/stocks/quotes?symbols=RELIANCE.NS%2CHDFCBANK.NS%2CTMPV.NS%2CTCS.NS%2CINFY.NS HTTP/1.1" 200 OK
+INFO:     127.0.0.1:15658 - "GET /api/news?symbol=RELIANCE.NS&limit=8 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:15660 - "GET /api/news?symbol=HDFCBANK.NS&limit=8 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:15665 - "GET /api/news?symbol=TCS.NS&limit=8 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:15664 - "GET /api/news?symbol=TMPV.NS&limit=8 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:15666 - "GET /api/news?symbol=INFY.NS&limit=8 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:15666 - "POST /api/sentiment/analyze HTTP/1.1" 503 Service Unavailable
+INFO:     127.0.0.1:15664 - "POST /api/sentiment/analyze HTTP/1.1" 503 Service Unavailable
+INFO:     127.0.0.1:15665 - "POST /api/sentiment/analyze HTTP/1.1" 503 Service Unavailable
+INFO:     127.0.0.1:15660 - "POST /api/sentiment/analyze HTTP/1.1" 503 Service Unavailable
+INFO:     127.0.0.1:15658 - "POST /api/sentiment/analyze HTTP/1.1" 503 Service Unavailable
+INFO:     127.0.0.1:15677 - "GET /api/news?symbol=RELIANCE.NS&limit=8 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:15679 - "GET /api/news?symbol=HDFCBANK.NS&limit=8 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:15682 - "GET /api/news?symbol=TMPV.NS&limit=8 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:15683 - "GET /api/news?symbol=TCS.NS&limit=8 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:15686 - "GET /api/stocks/RELIANCE.NS/history?period=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:15677 - "GET /api/news?symbol=INFY.NS&limit=8 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:15677 - "POST /api/sentiment/analyze HTTP/1.1" 503 Service Unavailable
+INFO:     127.0.0.1:15686 - "POST /api/sentiment/analyze HTTP/1.1" 503 Service Unavailable
+INFO:     127.0.0.1:15683 - "POST /api/sentiment/analyze HTTP/1.1" 503 Service Unavailable
+INFO:     127.0.0.1:15679 - "POST /api/sentiment/analyze HTTP/1.1" 503 Service Unavailable
+INFO:     127.0.0.1:15682 - "POST /api/sentiment/analyze HTTP/1.1" 503 Service Unavailable
+INFO:     127.0.0.1:15687 - "OPTIONS /api/stocks/supported HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55373 - "OPTIONS /api/predictions/RELIANCE.NS HTTP/1.1" 200 OK
+INFO:     127.0.0.1:15687 - "GET /api/stocks/supported HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55376 - "POST /api/predictions/RELIANCE.NS HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55390 - "OPTIONS /api/stocks/AAPL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55392 - "OPTIONS /api/stocks/AAPL/history?period=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55392 - "OPTIONS /api/news?symbol=AAPL&limit=8 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55390 - "GET /api/stocks/AAPL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55394 - "GET /api/stocks/AAPL/history?period=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55392 - "GET /api/news?symbol=AAPL&limit=8 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55392 - "POST /api/sentiment/analyze HTTP/1.1" 503 Service Unavailable

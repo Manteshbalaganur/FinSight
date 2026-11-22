@@ -1,10 +1,9 @@
 "use client";
 
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from "recharts";
-import { getPortfolioSeries } from "@/lib/mockData";
+import type { PortfolioPoint } from "@/lib/types";
 
-export default function PortfolioChart() {
-  const data = getPortfolioSeries();
+export default function PortfolioChart({ data }: { data: PortfolioPoint[] }) {
   return (
     <ResponsiveContainer width="100%" height={300}>
       <AreaChart data={data} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
@@ -16,7 +15,14 @@ export default function PortfolioChart() {
         </defs>
         <CartesianGrid strokeDasharray="3 3" stroke="#1F2230" vertical={false} />
         <XAxis dataKey="date" stroke="#8B92A8" fontSize={12} tickLine={false} axisLine={false} />
-        <YAxis stroke="#8B92A8" fontSize={12} tickLine={false} axisLine={false} tickFormatter={(v) => `\u20B9${(v / 1000).toFixed(0)}k`} />
+        <YAxis
+          stroke="#8B92A8"
+          fontSize={12}
+          tickLine={false}
+          axisLine={false}
+          domain={["auto", "auto"]}
+          tickFormatter={(v) => `\u20B9${(v / 1000).toFixed(0)}k`}
+        />
         <Tooltip
           contentStyle={{
             backgroundColor: "#12141C",

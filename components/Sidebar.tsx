@@ -46,8 +46,7 @@ export default function Sidebar() {
       </nav>
       <div className="border-t border-border p-4">
         <p className="text-xs text-text-muted">
-          Demo data — for academic review only. Not financial advice.
-        </p>
+          Live data: Yahoo Finance (may be delayed) and Google News. Experimental, not financial advice.</p>
       </div>
     </aside>
   );

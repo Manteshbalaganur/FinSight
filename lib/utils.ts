@@ -31,3 +31,12 @@ export function formatSignedINR(value: number): string {
   const sign = value > 0 ? "+" : value < 0 ? "\u2212" : "";
   return `${sign}\u20B9${inrFormatter.format(Math.round(Math.abs(value)))}`;
 }
+
+export function formatMoney(value: number, currency: string): string {
+  return new Intl.NumberFormat(currency === "INR" ? "en-IN" : "en-US", {
+    style: "currency",
+    currency,
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(value);
+}

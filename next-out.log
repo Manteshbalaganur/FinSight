@@ -1,0 +1,42 @@
+
+> portfolio-ai-dashboard@1.0.0 dev
+> next dev
+
+  ▲ Next.js 14.2.5
+  - Local:        http://localhost:3001
+  - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 8.5s
+ ○ Compiling / ...
+ ✓ Compiled / in 19.4s (1613 modules)
+ GET / 200 in 2541ms
+ GET / 200 in 19890ms
+ ○ Compiling /portfolio ...
+ ✓ Compiled /portfolio in 4.7s (1630 modules)
+ GET /portfolio 200 in 4909ms
+ GET /portfolio 200 in 4921ms
+ ✓ Compiled /news in 389ms (1622 modules)
+ GET /news 200 in 475ms
+ GET /news 200 in 484ms
+ ✓ Compiled /sentiment in 454ms (1642 modules)
+ GET /sentiment 200 in 606ms
+ GET /sentiment 200 in 617ms
+ ✓ Compiled /prediction in 504ms (1662 modules)
+ GET /prediction 200 in 659ms
+ GET /prediction 200 in 670ms
+ ✓ Compiled /assistant in 471ms (1672 modules)
+ GET /assistant 200 in 611ms
+ GET /assistant 200 in 618ms
+ ○ Compiling /stock/[symbol] ...
+ ✓ Compiled /stock/[symbol] in 1330ms (1684 modules)
+ GET /stock/AAPL 200 in 2163ms
+ GET /stock/AAPL 200 in 2168ms
+ ✓ Compiled in 499ms (850 modules)
+ GET / 200 in 77ms
+ GET /portfolio 200 in 53ms
+ GET /news 200 in 60ms
+ GET /sentiment 200 in 56ms
+ GET /prediction 200 in 67ms
+ GET /stock/AAPL 200 in 44ms
+ ✓ Compiled in 413ms (850 modules)

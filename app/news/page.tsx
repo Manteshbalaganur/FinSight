@@ -2,15 +2,17 @@
 
 import { useState, useMemo } from "react";
 import NewsCard from "@/components/NewsCard";
-import { news } from "@/lib/mockData";
+import { Loading, ErrorBox, Empty, Notice } from "@/components/DataState";
+import { usePortfolioNews } from "@/lib/hooks";
 
 export default function NewsPage() {
+  const { items: news, newsLoading, newsError, sentimentState, sentimentError, reload } = usePortfolioNews();
   const [company, setCompany] = useState("All");
   const [sector, setSector] = useState("All");
   const [sentiment, setSentiment] = useState("All");
 
-  const companies = useMemo(() => ["All", ...Array.from(new Set(news.map((n) => n.company)))], []);
-  const sectors = useMemo(() => ["All", ...Array.from(new Set(news.map((n) => n.sector)))], []);
+  const companies = useMemo(() => ["All", ...Array.from(new Set(news.map((n) => n.company)))], [news]);
+  const sectors = useMemo(() => ["All", ...Array.from(new Set(news.map((n) => n.sector)))], [news]);
   const sentiments = ["All", "positive", "neutral", "negative"];
 
   const filtered = useMemo(() => {
@@ -20,7 +22,7 @@ export default function NewsPage() {
       if (sentiment !== "All" && n.sentiment !== sentiment) return false;
       return true;
     });
-  }, [company, sector, sentiment]);
+  }, [news, company, sector, sentiment]);
 
   return (
     <div className="space-y-6">
@@ -65,10 +67,15 @@ export default function NewsPage() {
         </select>
       </div>
 
-      {filtered.length === 0 ? (
-        <div className="rounded-xl border border-border bg-bg-card p-12 text-center">
-          <p className="text-text-muted">No news articles match your filters. Try adjusting the filters above.</p>
-        </div>
+      {sentimentState === "loading" && <Notice>OpenAI sentiment analysis in progress. Headlines are shown below meanwhile.</Notice>}
+      {sentimentState === "error" && sentimentError && <ErrorBox message={`Sentiment analysis unavailable: ${sentimentError}`} />}
+
+      {newsLoading ? (
+        <Loading label="Fetching latest news..." />
+      ) : newsError ? (
+        <ErrorBox message={`News unavailable: ${newsError}`} onRetry={reload} />
+      ) : filtered.length === 0 ? (
+        <Empty className="p-12">No news articles match your filters. Try adjusting the filters above.</Empty>
       ) : (
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
           {filtered.map((item) => (

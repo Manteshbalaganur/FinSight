@@ -1,10 +1,9 @@
 "use client";
 
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Legend } from "recharts";
-import { getSentimentPriceSeries } from "@/lib/mockData";
+import type { SentimentPoint } from "@/lib/types";
 
-export default function SentimentPriceChart() {
-  const data = getSentimentPriceSeries();
+export default function SentimentPriceChart({ data }: { data: SentimentPoint[] }) {
   return (
     <ResponsiveContainer width="100%" height={320}>
       <LineChart data={data} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
@@ -21,6 +20,7 @@ export default function SentimentPriceChart() {
         <YAxis
           yAxisId="price"
           orientation="right"
+          domain={["auto", "auto"]}
           stroke="#3B82F6"
           fontSize={11}
           tickLine={false}
@@ -35,7 +35,7 @@ export default function SentimentPriceChart() {
           }}
         />
         <Legend wrapperStyle={{ fontSize: "12px", color: "#8B92A8" }} iconType="circle" />
-        <Line yAxisId="sentiment" type="monotone" dataKey="sentiment" stroke="#10B981" strokeWidth={2} dot={false} name="Sentiment Score" />
+        <Line yAxisId="sentiment" type="monotone" dataKey="sentiment" stroke="#10B981" strokeWidth={2} dot={{ r: 3 }} connectNulls name="Sentiment Score" />
         <Line yAxisId="price" type="monotone" dataKey="price" stroke="#3B82F6" strokeWidth={2} dot={false} name="Stock Price" />
       </LineChart>
     </ResponsiveContainer>

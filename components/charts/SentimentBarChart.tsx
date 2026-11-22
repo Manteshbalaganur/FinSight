@@ -1,10 +1,8 @@
 "use client";
 
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Cell } from "recharts";
-import { getNewsCounts } from "@/lib/mockData";
 
-export default function SentimentBarChart() {
-  const data = getNewsCounts();
+export default function SentimentBarChart({ data }: { data: { sentiment: string; count: number }[] }) {
   const colors: Record<string, string> = {
     Positive: "#10B981",
     Neutral: "#F59E0B",

@@ -1,14 +1,12 @@
+"use client";
+
 import { cn } from "@/lib/utils";
 import { formatINR, formatPercent } from "@/lib/utils";
-import { getHoldingRows, getInvested, getCurrentValue, getProfitLoss } from "@/lib/mockData";
+import type { HoldingRow, PortfolioTotals } from "@/lib/portfolio";
 
-export default function StockTable() {
-  const rows = getHoldingRows();
-  const totalInvested = getInvested();
-  const totalValue = getCurrentValue();
-  const totalPL = getProfitLoss();
-  const totalPLPct = (totalPL / totalInvested) * 100;
+const dash = <span className="text-text-muted">&mdash;</span>;
 
+export default function StockTable({ rows, totals }: { rows: HoldingRow[]; totals: PortfolioTotals }) {
   return (
     <div className="overflow-x-auto rounded-xl border border-border bg-bg-card">
       <table className="w-full text-sm">
@@ -37,14 +35,18 @@ export default function StockTable() {
               </td>
               <td className="px-4 py-3 text-right tabular-nums text-text-primary">{r.qty}</td>
               <td className="px-4 py-3 text-right tabular-nums text-text-muted">{formatINR(r.buyPrice)}</td>
-              <td className="px-4 py-3 text-right tabular-nums text-text-primary">{formatINR(r.currentPrice)}</td>
-              <td className="px-4 py-3 text-right tabular-nums text-text-muted">{formatINR(r.invested)}</td>
-              <td className="px-4 py-3 text-right tabular-nums text-text-primary">{formatINR(r.currentValue)}</td>
-              <td className={cn("px-4 py-3 text-right font-semibold tabular-nums", r.pl >= 0 ? "text-profit" : "text-loss")}>
-                {r.pl >= 0 ? "+" : "\u2212"}{formatINR(Math.abs(r.pl))}
+              <td className="px-4 py-3 text-right tabular-nums text-text-primary">
+                {r.currentPrice !== null ? formatINR(r.currentPrice) : dash}
               </td>
-              <td className={cn("px-4 py-3 text-right font-semibold tabular-nums", r.plPercent >= 0 ? "text-profit" : "text-loss")}>
-                {formatPercent(r.plPercent)}
+              <td className="px-4 py-3 text-right tabular-nums text-text-muted">{formatINR(r.invested)}</td>
+              <td className="px-4 py-3 text-right tabular-nums text-text-primary">
+                {r.currentValue !== null ? formatINR(r.currentValue) : dash}
+              </td>
+              <td className={cn("px-4 py-3 text-right font-semibold tabular-nums", (r.pl ?? 0) >= 0 ? "text-profit" : "text-loss")}>
+                {r.pl !== null ? <>{r.pl >= 0 ? "+" : "\u2212"}{formatINR(Math.abs(r.pl))}</> : dash}
+              </td>
+              <td className={cn("px-4 py-3 text-right font-semibold tabular-nums", (r.plPercent ?? 0) >= 0 ? "text-profit" : "text-loss")}>
+                {r.plPercent !== null ? formatPercent(r.plPercent) : dash}
               </td>
               <td className="px-4 py-3">
                 <span className="rounded-full bg-bg-hover px-2.5 py-0.5 text-xs font-medium text-text-muted">
@@ -57,15 +59,17 @@ export default function StockTable() {
         <tfoot>
           <tr className="border-t-2 border-border bg-bg-base font-bold">
             <td className="px-4 py-3 text-text-primary">Total</td>
-            <td className="px-4 py-3 text-right tabular-nums text-text-muted">75</td>
+            <td className="px-4 py-3 text-right tabular-nums text-text-muted">{totals.qty}</td>
             <td className="px-4 py-3"></td>
             <td className="px-4 py-3"></td>
-            <td className="px-4 py-3 text-right tabular-nums text-text-primary">{formatINR(totalInvested)}</td>
-            <td className="px-4 py-3 text-right tabular-nums text-text-primary">{formatINR(totalValue)}</td>
-            <td className="px-4 py-3 text-right tabular-nums text-profit">
-              +{formatINR(totalPL)}
+            <td className="px-4 py-3 text-right tabular-nums text-text-primary">{formatINR(totals.invested)}</td>
+            <td className="px-4 py-3 text-right tabular-nums text-text-primary">{formatINR(totals.value)}</td>
+            <td className={cn("px-4 py-3 text-right tabular-nums", totals.pl >= 0 ? "text-profit" : "text-loss")}>
+              {totals.pl >= 0 ? "+" : "\u2212"}{formatINR(Math.abs(totals.pl))}
             </td>
-            <td className="px-4 py-3 text-right tabular-nums text-profit">{formatPercent(totalPLPct)}</td>
+            <td className={cn("px-4 py-3 text-right tabular-nums", totals.pl >= 0 ? "text-profit" : "text-loss")}>
+              {formatPercent(totals.plPercent)}
+            </td>
             <td className="px-4 py-3"></td>
           </tr>
         </tfoot>
